@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "SRT Translator",
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "SRT Translator",
+    "default_icon": "icons/icon48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://chatgpt.com/*",
+        "*://chat.openai.com/*",
+        "*://claude.ai/*",
+        "*://grok.com/*",
+        "*://x.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  }
+}

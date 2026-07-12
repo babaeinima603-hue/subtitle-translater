@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>مترجم زیرنویس SRT</title>
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="logo">🎬</div>
+  <h1>مترجم زیرنویس</h1>
+  <p class="sub">فایل SRT را در پوشه زیر بگذارید</p>
+
+  <div class="section">
+    <div class="sec-title">سرویس ترجمه</div>
+    <button class="stab on" id="t-gpt">💬 ChatGPT</button>
+    <button class="stab"    id="t-cl">🤖 Claude.ai</button>
+    <button class="stab"    id="t-grk">⚡ Grok</button>
+    <button class="stab"    id="t-gem">✨ Gemini</button>
+    <button class="stab"    id="t-cop">🪟 Copilot</button>
+    <button class="stab"    id="t-mis">🌊 Mistral</button>
+    <button class="stab"    id="t-per">🔍 Perplexity</button>
+    <button class="stab"    id="t-dsk">🐋 DeepSeek</button>
+    <button class="open-btn" id="open-btn">🔗 باز کردن در تب جدید</button>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">فایل SRT</div>
+
+    <div class="folder-box" id="folder-box">
+      <div class="folder-icon">📁</div>
+      <div class="folder-label">فایل خود را اینجا بکشید</div>
+      <div class="folder-sub">یا دکمه زیر را بزنید</div>
+    </div>
+
+    <label class="pick-btn" id="pick-label">
+      📂 انتخاب فایل SRT
+      <input type="file" id="file-input" accept=".srt">
+    </label>
+
+    <div class="file-ok" id="file-ok">
+      <span class="fname" id="fname"></span>
+      <span class="fcnt"  id="fcnt"></span>
+      <button id="clear-btn">✕</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">تنظیمات</div>
+    <label class="lbl">خط در هر پیام
+      <select id="chunk-size">
+        <option value="5">۵ خط</option>
+        <option value="10" selected>۱۰ خط</option>
+        <option value="20">۲۰ خط</option>
+        <option value="30">۳۰ خط</option>
+        <option value="50">۵۰ خط</option>
+        <option value="75">۷۵ خط</option>
+        <option value="100">۱۰۰ خط</option>
+      </select>
+    </label>
+    <label class="lbl">تاخیر بین پیام‌ها (ثانیه)
+      <input type="number" id="delay-sec" value="4" min="1" max="60">
+    </label>
+    <label class="lbl">⏱ زمان انتظار برای جواب (ثانیه)
+      <input type="number" id="read-delay" value="15" min="0" max="120">
+    </label>
+    <label class="lbl" style="display:flex;align-items:center;gap:8px;cursor:pointer">
+      <input type="checkbox" id="auto-detect" style="width:auto;margin:0;accent-color:#0d7a5f">
+      <span>🧪 تشخیص خودکار پایان جواب (آزمایشی)</span>
+    </label>
+    <label class="lbl">🔁 تلاش مجدد برای خط‌های جا افتاده
+      <select id="max-retry">
+        <option value="1">بدون تلاش مجدد</option>
+        <option value="2">۱ بار</option>
+        <option value="3" selected>۲ بار</option>
+        <option value="5">۴ بار</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="err" id="err-box"></div>
+
+  <div class="btn-area">
+    <button class="btn-go"   id="go-btn">▶ شروع ترجمه</button>
+    <button class="btn-stop" id="stop-btn">⬛ توقف</button>
+    <button class="btn-dl"   id="dl-btn">⬇ دانلود SRT فارسی</button>
+    <button class="btn-dl btn-dl2" id="dl-bi-btn">⬇ دانلود دوزبانه (EN+FA)</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="top-bar">
+    <div class="prog-wrap" id="prog-wrap">
+      <div class="prog-stats">
+        <span id="s-done">0</span> از <span id="s-total">0</span> خط ترجمه‌شده
+        &nbsp;|&nbsp; <span id="s-pct">0%</span>
+      </div>
+      <div class="pgwrap"><div class="pgbar" id="pg-bar"></div></div>
+      <div class="stxt" id="status-txt">آماده...</div>
+    </div>
+  </div>
+
+  <div class="preview-area" id="preview-area">
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">🎬</div>
+      <div class="empty-title">فایل SRT را انتخاب کنید</div>
+      <div class="empty-sub">فایل را از سمت راست انتخاب کنید تا زیرنویس‌ها اینجا نمایش داده شوند</div>
+    </div>
+    <table class="sub-table" id="sub-table">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th>زمان</th>
+          <th>متن انگلیسی</th>
+          <th>ترجمه فارسی</th>
+          <th style="width:50px">وضعیت</th>
+        </tr>
+      </thead>
+      <tbody id="sub-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="page.js"></script>
+</body>
+</html>
